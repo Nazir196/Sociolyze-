@@ -1,0 +1,12 @@
+/* Hero video parallax fix */
+.td-hero-bottom-thumb {
+    overflow: hidden;
+}
+
+.td-hero-bottom-thumb video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
