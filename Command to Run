@@ -1,1 +1,18 @@
 npx eleventy --serve
+
+
+# 1. Check what's changed (confirm all deletions are listed)
+git status
+
+# 2. Stage EVERYTHING (deletions and new files)
+git add -A
+
+# 3. Verify what's being committed
+git status
+# Should show all deletions staged and new files staged
+
+# 4. Commit
+git commit -m "Major update: Migrated to Eleventy and removed old files"
+
+# 5. Push
+git push
