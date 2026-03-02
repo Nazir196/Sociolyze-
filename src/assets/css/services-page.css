@@ -1,0 +1,258 @@
+/* =============================================
+   SERVICE PAGE STYLES
+   Only extending the theme — no global overrides
+   ============================================= */
+
+/* ── Smooth scroll on the document root ────────────────────── */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ── Page wrapper ───────────────────────────────────────────── */
+.td-services-page-area {
+    overflow: hidden;
+}
+
+/* ── Individual service section ─────────────────────────────── */
+.td-sp-section {
+    padding-bottom: 120px;
+}
+
+/* ── Divider between sections ───────────────────────────────── */
+.td-sp-divider {
+    height: 1px;
+    background: rgba(28, 29, 31, 0.10);
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* ── Subtitle tag above heading ─────────────────────────────── */
+.td-sp-subtitle {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--td-common-black, #1c1d1f);
+    opacity: 0.55;
+}
+
+/* ── Section heading ────────────────────────────────────────── */
+.td-sp-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--td-common-black, #1c1d1f);
+    letter-spacing: -0.02em;
+}
+
+.td-sp-title span {
+    /* Uses the theme's primary accent colour — matches existing <span> treatment */
+    color: var(--td-theme-color, #1c1d1f);
+    font-style: italic;
+}
+
+/* ── Body text ──────────────────────────────────────────────── */
+.td-sp-text {
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(28, 29, 31, 0.65);
+    max-width: 480px;
+}
+
+/* ── Feature list ───────────────────────────────────────────── */
+.td-sp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.td-sp-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--td-common-black, #1c1d1f);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(28, 29, 31, 0.08);
+    transition: color 0.25s ease;
+}
+
+.td-sp-list li:last-child {
+    border-bottom: none;
+}
+
+.td-sp-list li i {
+    font-size: 13px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--td-common-black, #1c1d1f);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.td-sp-list li:hover {
+    color: var(--td-theme-color, #063231);
+}
+
+.td-sp-list li:hover i {
+    transform: scale(1.1);
+}
+
+/* ── Image thumbnail wrapper ────────────────────────────────── */
+.td-sp-thumb {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.td-sp-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.td-sp-thumb:hover img {
+    transform: scale(1.04);
+}
+
+/* ── Number badge on the corner of each image ───────────────── */
+.td-sp-thumb-badge {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: var(--td-common-black, #1c1d1f);
+    color: #fff;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.td-sp-thumb-badge--right {
+    left: auto;
+    right: 24px;
+}
+
+.td-sp-thumb-badge .number {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* ── Content column spacing ─────────────────────────────────── */
+.td-sp-content {
+    padding-top: 10px;
+}
+
+/* Offset on desktop only */
+@media (min-width: 992px) {
+    .td-sp-content.ml-60 {
+        margin-left: 60px;
+    }
+
+    .td-sp-content.mr-60 {
+        margin-right: 60px;
+    }
+}
+
+/* ── Button group uses existing theme classes
+   td-btn-2, td-btn-primary, td-btn-circle — no override needed ── */
+.td-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ── CTA strip ──────────────────────────────────────────────── */
+.td-sp-cta-area {
+    margin-top: 0;
+}
+
+.td-sp-cta-subtitle {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 600;
+}
+
+.td-sp-cta-title {
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.td-sp-cta-title span {
+    font-style: italic;
+}
+
+/* CTA button variant — white-outlined on dark bg */
+.td-btn-primary-light {
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+    color: #fff !important;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.td-btn-primary-light:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: #fff !important;
+}
+
+/* ── Responsive tweaks ──────────────────────────────────────── */
+@media (max-width: 991.98px) {
+
+    /* On mobile, image always appears FIRST, content second */
+    .td-sp-section--img-right .order-1 {
+        order: 1 !important;
+    }
+
+    .td-sp-section--img-right .order-2 {
+        order: 2 !important;
+    }
+
+    .td-sp-content {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-top: 40px;
+    }
+
+    .td-sp-thumb {
+        margin-bottom: 0;
+    }
+
+    .td-sp-text {
+        max-width: 100%;
+    }
+
+    .td-sp-section {
+        padding-bottom: 80px;
+    }
+
+    .td-sp-cta-title {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .td-sp-section {
+        padding-bottom: 60px;
+    }
+
+    .td-sp-title {
+        font-size: 2rem;
+    }
+}
