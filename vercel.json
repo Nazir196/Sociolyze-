@@ -1,0 +1,4 @@
+{
+  "buildCommand": "eleventy",
+  "outputDirectory": "_site"
+}
