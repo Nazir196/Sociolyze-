@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Nazir196/Sociolyze-#readme",
   "dependencies": {
-    "@11ty/eleventy": "^3.1.2"
+    "@11ty/eleventy": "^3.1.2",
+    "eleventy": "^2.0.1"
   }
 }
