@@ -1,3 +1,4 @@
 {
-    "installCommand": "npm install --include=dev"
+    "installCommand": "npm install --include=dev",
+    "buildCommand": "chmod +x ./node_modules/.bin/eleventy && npm run build"
 }
