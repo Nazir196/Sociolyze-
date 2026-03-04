@@ -1,54 +1,46 @@
-$(function() {
+$(document).ready(function() {
+    // Handling form submission via event delegation
+    $(document).on('submit', '#contact-form', function(e) {
+        e.preventDefault();
 
-	// Get the form.
-	var form = $('#contact-form');
+        var form = $(this);
+        var formMessages = $('.ajax-response');
+        var formData = form.serialize();
 
-	// Get the messages div.
-	var formMessages = $('.ajax-response');
+        // Visual feedback: disable button
+        var submitBtn = form.find('button[type="submit"]');
+        var originalBtnText = submitBtn.find('.td-btn-2').text();
+        submitBtn.prop('disabled', true).find('.td-btn-2').text('Sending...');
 
-	// Set up an event listener for the contact form.
-	$(form).submit(function(e) {
-		// Stop the browser from submitting the form.
-		e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: form.attr('action'),
+            data: formData,
+            dataType: 'json',
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .done(function(response) {
+            $(formMessages).removeClass('error').addClass('success');
+            $(formMessages).text('Thank you! Your message has been sent successfully.');
+            form.find('input, textarea').val('');
+        })
+        .fail(function(data) {
+            $(formMessages).removeClass('success').addClass('error');
+            if (data.responseJSON && data.responseJSON.errors) {
+                $(formMessages).text(data.responseJSON.errors.map(function(error) { return error.message; }).join(', '));
+            } else {
+                $(formMessages).text('Oops! An error occurred and your message could not be sent.');
+            }
+        })
+        .always(function() {
+            submitBtn.prop('disabled', false).find('.td-btn-2').text(originalBtnText);
+        });
+    });
 
-		// Serialize the form data.
-		var formData = $(form).serialize();
-
-		// Submit the form using AJAX.
-		$.ajax({
-			type: 'POST',
-			url: $(form).attr('action'),
-			data: formData,
-			dataType: 'json',
-			headers: {
-				'Accept': 'application/json'
-			}
-		})
-		.done(function(response) {
-			// Make sure that the formMessages div has the 'success' class.
-			$(formMessages).removeClass('error');
-			$(formMessages).addClass('success');
-
-			// Set the message text.
-			$(formMessages).text('Thank you! Your message has been sent successfully.');
-
-			// Clear the form.
-			$('#contact-form input,#contact-form textarea').val('');
-		})
-		.fail(function(data) {
-			// Make sure that the formMessages div has the 'error' class.
-			$(formMessages).removeClass('success');
-			$(formMessages).addClass('error');
-
-			// Set the message text.
-			if (data.responseJSON && data.responseJSON.errors) {
-				$(formMessages).text(data.responseJSON.errors.map(error => error.message).join(', '));
-			} else if (data.responseText !== '') {
-				$(formMessages).text(data.responseText);
-			} else {
-				$(formMessages).text('Oops! An error occurred and your message could not be sent.');
-			}
-		});
-	});
-
+    // Fallback: Ensure button click triggers form submit
+    $(document).on('click', '#contact-form button[type="submit"]', function(e) {
+        $(this).closest('form').submit();
+    });
 });
