@@ -1,52 +1,65 @@
 $(document).ready(function() {
-    // The main submit handler for the contact form
-    $('#contact-form').on('submit', function(e) {
-        // 1. STOP the browser from actually submitting (reloading the page)
-        e.preventDefault();
+    // Robust Fetch-based submission
+    $(document).on('click', '#submit-btn-trigger', function(e) {
+        console.log("ROBUST SUBMIT CLICKED");
         
-        console.log("Submit event intercepted. Starting AJAX...");
-
-        var form = $(this);
+        var btn = $(this);
+        var form = $('#contact-form');
         var formMessages = $('.ajax-response');
-        var formData = form.serialize();
+        
+        // 1. Validation check
+        var name = $('#name').val();
+        var email = $('#email').val();
+        var message = $('#message').val();
+        
+        if (!name || !email || !message) {
+            $(formMessages).removeClass('success').addClass('error').text('Please fill in all required fields (Name, Email, Message).');
+            return;
+        }
 
-        // Visual feedback
-        var submitBtn = form.find('button[type="submit"]');
-        var originalBtnText = submitBtn.find('.td-btn-2').text();
-        submitBtn.prop('disabled', true).find('.td-btn-2').text('Sending...');
+        // 2. Visual feedback
+        var originalBtnText = btn.find('.td-btn-2').text();
+        btn.prop('disabled', true).find('.td-btn-2').text('Sending...');
+        console.log("Sending data to: " + form.attr('action'));
 
-        $.ajax({
-            type: 'POST',
-            url: form.attr('action'),
-            data: formData,
-            dataType: 'json',
+        // 3. Prepare Data
+        var data = {
+            name: name,
+            email: email,
+            phone: $('#phone').val(),
+            website: $('#website').val(),
+            message: message
+        };
+
+        // 4. Fetch Submission
+        fetch(form.attr('action'), {
+            method: 'POST',
+            body: JSON.stringify(data),
             headers: {
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
-        })
-        .done(function(response) {
-            console.log("SUCCESS:", response);
-            $(formMessages).removeClass('error').addClass('success');
-            $(formMessages).text('Thank you! Your message has been sent successfully.');
-            form[0].reset(); // Clear the form properly
-        })
-        .fail(function(data) {
-            console.error("FAILURE (Details follow):", data);
-            $(formMessages).removeClass('success').addClass('error');
-            
-            if (data.status === 0) {
-                $(formMessages).text('Connection failed. Please check if your page reloaded or your internet connection.');
-            } else if (data.responseJSON && data.responseJSON.errors) {
-                $(formMessages).text(data.responseJSON.errors.map(function(error) { return error.message; }).join(', '));
+        }).then(response => {
+            if (response.ok) {
+                console.log("FETCH SUCCESS");
+                $(formMessages).removeClass('error').addClass('success').text('Thank you! Your message has been sent successfully.');
+                form[0].reset();
             } else {
-                $(formMessages).text('Oops! An error occurred. Please try again later.');
+                response.json().then(data => {
+                    console.error("FETCH ERROR DATA:", data);
+                    $(formMessages).removeClass('success').addClass('error');
+                    if (data && data.errors) {
+                        $(formMessages).text(data.errors.map(error => error.message).join(", "));
+                    } else {
+                        $(formMessages).text("Oops! There was a problem submitting your form.");
+                    }
+                });
             }
-        })
-        .always(function() {
-            submitBtn.prop('disabled', false).find('.td-btn-2').text(originalBtnText);
+        }).catch(error => {
+            console.error("FETCH FATAL ERROR:", error);
+            $(formMessages).removeClass('success').addClass('error').text('Oops! There was a problem submitting your form.');
+        }).finally(() => {
+            btn.prop('disabled', false).find('.td-btn-2').text(originalBtnText);
         });
-
-        // Extra guard: return false to be absolutely sure no postback occurs
-        return false; 
     });
 });
