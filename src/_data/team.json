@@ -1,0 +1,48 @@
+{
+  "members": [
+    {
+      "name": "Junaid",
+      "role": "Developer",
+      "image": "thumb.jpg",
+      "social": {
+        "twitter": "#",
+        "facebook": "#",
+        "instagram": "#",
+        "linkedin": "#"
+      }
+    },
+    {
+      "name": "Umair",
+      "role": "Developer",
+      "image": "thumb-2.jpg",
+      "social": {
+        "twitter": "#",
+        "facebook": "#",
+        "instagram": "#",
+        "linkedin": "#"
+      }
+    },
+    {
+      "name": "Dandu",
+      "role": "Developer",
+      "image": "thumb-3.jpg",
+      "social": {
+        "twitter": "#",
+        "facebook": "#",
+        "instagram": "#",
+        "linkedin": "#"
+      }
+    },
+    {
+      "name": "Samir",
+      "role": "Developer",
+      "image": "thumb-4.jpg",
+      "social": {
+        "twitter": "#",
+        "facebook": "#",
+        "instagram": "#",
+        "linkedin": "#"
+      }
+    }
+  ]
+}
