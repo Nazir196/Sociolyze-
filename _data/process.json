@@ -1,0 +1,34 @@
+[
+  {
+    "number": "01",
+    "title": "Discover",
+    "text": "We understand your business, goals, and audience to create a clear strategy.",
+    "delay": 0.3,
+    "extraClass": "mt-120",
+    "icon": "icons/process-01.njk"
+  },
+  {
+    "number": "02",
+    "title": "Plan",
+    "text": "We design a customized roadmap to achieve maximum digital impact.",
+    "delay": 0.5,
+    "extraClass": "",
+    "icon": "icons/process-02.njk"
+  },
+  {
+    "number": "03",
+    "title": "Execute",
+    "text": "Our team implements creative campaigns, websites, and growth solutions.",
+    "delay": 0.7,
+    "extraClass": "mt-120",
+    "icon": "icons/process-03.njk"
+  },
+  {
+    "number": "04",
+    "title": "Optimize",
+    "text": "We track, analyze, and improve performance for continuous results.",
+    "delay": 0.9,
+    "extraClass": "",
+    "icon": "icons/process-04.njk"
+  }
+]
