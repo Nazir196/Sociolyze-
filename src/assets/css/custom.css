@@ -252,3 +252,9 @@
     .td-btn-circle:hover {
       background: #063231;
     }
+
+    /* Add this to your CSS file */
+    .td-btn-group:hover a.td-btn-circle:last-child {
+    opacity: 0;
+    pointer-events: none;
+}
